@@ -42,6 +42,7 @@ namespace Pasaje5.Controllers
                                 Text = sexo.NOMBRE,
                                 Value = sexo.IIDSEXO.ToString()
                             }).ToList();
+                listaSexo.Insert(0,new SelectListItem{ Text="--Seleccione--", Value = ""});
             }
         }
         public ActionResult Agregar()
@@ -53,13 +54,13 @@ namespace Pasaje5.Controllers
         [HttpPost]
         public ActionResult Agregar(ClienteCLS oClienteCLS)
         {
-            if (!ModelState.IsValid)
-            {
-                llenarSexo();//para que se vuelva a llenar el combobox
-                ViewBag.lista = listaSexo;
+            //if (!ModelState.IsValid)
+            //{
+            //    llenarSexo();//para que se vuelva a llenar el combobox
+            //    ViewBag.lista = listaSexo;
 
-                return View(oClienteCLS);
-            }
+            //    return View(oClienteCLS);
+            //}  //sin esto es como funciona
             using(var bd=new BDPasajeEntities1())
             {
                 Cliente oCliente = new Cliente();
@@ -69,8 +70,8 @@ namespace Pasaje5.Controllers
                 oCliente.EMAIL = oClienteCLS.email;
                 oCliente.DIRECCION = oClienteCLS.direccion;
                 oCliente.IIDSEXO = oClienteCLS.iidsexo;
-                oCliente.TELEFONOCELULAR = oClienteCLS.telefonocelular;
-                oCliente.TELEFONOFIJO = oClienteCLS.telefonofijo;
+                oCliente.TELEFONOCELULAR = oClienteCLS.telefonoCelular;
+                oCliente.TELEFONOFIJO = oClienteCLS.telefonoFijo;
                 oCliente.BHABILITADO = 1;
 
                 bd.Cliente.Add(oCliente);

@@ -36,10 +36,10 @@ namespace Pasaje5.Models
         public int iidsexo { get; set; }
         [Display(Name = "Teléfono Fijo Cliente")]
         [Required]
-        public string telefonofijo { get; set; }
+        public string telefonoFijo { get; set; }
         [Display(Name = "Teléfono Celular Cliente")]
         [Required]
-        public string telefonocelular { get; set; }
+        public string telefonoCelular { get; set; }
         [Display(Name = "Habilitado")]
         [Required]
         public int? bhabilitado { get; set; }
