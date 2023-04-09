@@ -39,7 +39,9 @@ namespace Pasaje5.Models
         public int bhabilitado { get; set; }
 
         //Propiedades adicionales
+        [Display(Name ="Tipo contrato")]
         public string nombreTipoContrato { get; set; }
+        [Display(Name ="Tipo usuario")]
         public string nombreTipoUsuario { get; set; }
     }
 }

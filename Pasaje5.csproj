@@ -157,6 +157,7 @@
     <Compile Include="Models\Bus.cs">
       <DependentUpon>BDPasajes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BusCLS.cs" />
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>BDPasajes.tt</DependentUpon>
     </Compile>
@@ -279,10 +280,10 @@
     <Content Include="Views\Marca\Agregar.cshtml" />
     <Content Include="Views\Sucursal\Agregar.cshtml" />
     <Content Include="Views\Cliente\Agregar.cshtml" />
+    <Content Include="Views\Empleado\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Empleado\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
