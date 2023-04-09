@@ -40,7 +40,7 @@ namespace Pasaje5.Models
         [Display(Name = "Sueldo")]
         [Range(0,100000,ErrorMessage ="Fuera de Rango")]
         [Required]
-        public double sueldo { get; set; }
+        public decimal sueldo { get; set; }
 
         //Propiedades adicionales
         [Display(Name ="Tipo contrato")]
