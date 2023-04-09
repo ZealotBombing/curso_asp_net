@@ -3,22 +3,22 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@Html.ActionLink("Empleado", "Agregar", "Marca", null, new { @class = "btn btn-primary" })
 <h2>Index</h2>
 <table class="table table-hover table-bordered">
     <thead>
         <tr>
-            <td>@Html.LabelFor(p =>Model[0].iidEmpleado)</td>
-            <td>@Html.LabelFor(p =>Model[0].nombre)</td>
-            <td>@Html.LabelFor(p =>Model[0].apPaterno)</td>
-            <td>@Html.LabelFor(p =>Model[0].nombreTipoUsuario)</td>
-            <td>@Html.LabelFor(p =>Model[0].nombreTipoContrato)</td>
-            
+            <td>@Html.LabelFor(p => Model[0].iidEmpleado)</td>
+            <td>@Html.LabelFor(p => Model[0].nombre)</td>
+            <td>@Html.LabelFor(p => Model[0].apPaterno)</td>
+            <td>@Html.LabelFor(p => Model[0].nombreTipoUsuario)</td>
+            <td>@Html.LabelFor(p => Model[0].nombreTipoContrato)</td>
+
         </tr>
     </thead>}
     <tbody>
-        @foreach(var item in Model)
-         {
+        @foreach (var item in Model)
+        {
             <tr>
                 <td>@item.iidEmpleado</td>
                 <td>@item.nombre</td>
@@ -26,6 +26,6 @@
                 <td>@item.nombreTipoUsuario</td>
                 <td>@item.nombreTipoContrato</td>
             </tr>
-         }
+        }
     </tbody>
 </table>
