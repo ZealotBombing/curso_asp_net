@@ -16,6 +16,10 @@ namespace Pasaje5.Models
         [Display(Name = "Tipo Bus")]
         [Required]
         public int iidTipoBus { get; set; }
+        [Display(Name ="Placa")]
+        [Required]
+        [StringLength(100,ErrorMessage ="Longitud máxima es de 100")]
+        public string placa { get; set; }
         [Display(Name = "Fecha Compra")]
         [Required]
         [DataType(DataType.Date)]

@@ -20,6 +20,7 @@ namespace Pasaje5.Controllers
                                  on empleado.IIDTIPOUSUARIO equals tipousuario.IIDTIPOUSUARIO
                                  join tipocontrato in bd.TipoContrato
                                  on empleado.IIDTIPOCONTRATO equals tipocontrato.IIDTIPOCONTRATO
+                                 where empleado.BHABILITADO == 1
                                  select new EmpleadoCLS
                                  {
                                      iidEmpleado = empleado.IIDEMPLEADO,
