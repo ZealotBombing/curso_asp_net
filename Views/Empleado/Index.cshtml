@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Index";
 }
-@Html.ActionLink("Empleado", "Agregar", "Marca", null, new { @class = "btn btn-primary" })
 <h2>Index</h2>
+@Html.ActionLink("Agregar", "Agregar", "Empleado", null, new { @class = "btn btn-primary" })
 <table class="table table-hover table-bordered">
     <thead>
         <tr>
@@ -15,7 +15,7 @@
             <td>@Html.LabelFor(p => Model[0].nombreTipoContrato)</td>
 
         </tr>
-    </thead>}
+    </thead>
     <tbody>
         @foreach (var item in Model)
         {

@@ -77,7 +77,7 @@ namespace Pasaje5.Controllers
                              Text = tipoUsuario.NOMBRE,
                              Value = tipoUsuario.IIDTIPOUSUARIO.ToString()
                          }).ToList();
-                lista.Insert(0, new SelectListItem { Text = "--Seleccione", Value = "" });
+                lista.Insert(0, new SelectListItem { Text = "--Seleccione--", Value = "" });
                 ViewBag.listaTipoUsuario = lista;
             }
         }

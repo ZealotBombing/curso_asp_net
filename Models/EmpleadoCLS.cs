@@ -37,6 +37,10 @@ namespace Pasaje5.Models
         [Required]
         public int iidSexo { get; set; }
         public int bhabilitado { get; set; }
+        [Display(Name = "Sueldo")]
+        [Range(0,100000,ErrorMessage ="Fuera de Rango")]
+        [Required]
+        public double sueldo { get; set; }
 
         //Propiedades adicionales
         [Display(Name ="Tipo contrato")]
