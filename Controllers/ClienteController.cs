@@ -29,6 +29,27 @@ namespace Pasaje5.Controllers
             }
             return View(lstCliente);//MOdel
         }
+        public ActionResult Editar(int id)
+        {
+            ClienteCLS oClienteCLS = new ClienteCLS();
+            using(var bd = new BDPasajeEntities1())
+            {
+                llenarSexo();
+                ViewBag.lista = listaSexo;
+
+                Cliente oCliente = bd.Cliente.Where(p => p.IIDCLIENTE.Equals(id)).First();
+                oClienteCLS.iidcliente = oCliente.IIDCLIENTE;
+                oClienteCLS.nombre = oCliente.NOMBRE;
+                oClienteCLS.appaterno = oCliente.APPATERNO;
+                oClienteCLS.apmaterno = oCliente.APMATERNO;
+                oClienteCLS.direccion = oCliente.DIRECCION;
+                oClienteCLS.email = oCliente.EMAIL;
+                oClienteCLS.iidsexo = (int)oCliente.IIDSEXO;//castear
+                oClienteCLS.telefonoCelular = oCliente.TELEFONOCELULAR;
+                oClienteCLS.telefonoFijo = oCliente.TELEFONOFIJO;
+            }
+            return View(oClienteCLS);
+        }
         List<SelectListItem> listaSexo;
 
         private void llenarSexo()

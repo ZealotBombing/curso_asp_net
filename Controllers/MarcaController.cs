@@ -31,6 +31,18 @@ namespace Pasaje5.Controllers
         {
             return View();
         }
+        public ActionResult Editar(int id)
+        {
+            MarcaCLS oMarcaCLS = new MarcaCLS();
+            using(var bd = new BDPasajeEntities1())
+            {
+                Marca oMarca = bd.Marca.Where(p => p.IIDMARCA.Equals(id)).First();//First es para que devuelva un objero y no una lista
+                oMarcaCLS.iidamarca = oMarca.IIDMARCA;
+                oMarcaCLS.nombre = oMarca.NOMBRE;
+                oMarcaCLS.descripcion = oMarca.DESCRIPCION;
+            }
+            return View(oMarcaCLS);
+        }
         [HttpPost]
         public ActionResult Agregar(MarcaCLS oMarcaCls)//trae el model de la vista (creo)
         {

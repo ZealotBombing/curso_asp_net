@@ -29,6 +29,7 @@ namespace Pasaje5.Models
         [EmailAddress(ErrorMessage = "Ingrese un mail válido")]
         public string email { get; set; }
         [Display(Name = "Dirección Cliente")]
+        [DataType(DataType.MultilineText)]
         [Required]
         public string direccion { get; set; }
         [Display(Name = "Sexo Cliente")]
