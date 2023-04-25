@@ -18,11 +18,12 @@ namespace Pasaje5.Models
         public int iidLugarDestino { get; set; }
         [Display(Name = "Precio")]
         [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Range(0,100000,ErrorMessage = "Rango fuera de índices")]
         public double precio { get; set; }
         [Display(Name = "Fecha Viaje")]
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime fechaViaje { get; set; }
         [Display(Name = "Bus")]
         [Required]

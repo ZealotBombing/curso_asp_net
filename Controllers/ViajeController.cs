@@ -33,5 +33,47 @@ namespace Pasaje5.Controllers
             }
             return View(listaViaje);
         }
-    }
+        public ActionResult Agregar()
+        {
+            ListarCombos();
+            return View();
+        }
+        public void listarLugar()
+        {
+            List<SelectListItem> listaLugar;
+            using (var bd = new BDPasajeEntities1())
+            {
+                listaLugar = (from tipoContrato in bd.Lugar
+                         where tipoContrato.BHABILITADO == 1
+                         select new SelectListItem
+                         {
+                             Text = tipoContrato.NOMBRE,
+                             Value = tipoContrato.IIDLUGAR.ToString()
+                         }).ToList();
+                listaLugar.Insert(0, new SelectListItem { Text = "--Seleccione", Value = "" });
+                ViewBag.listaLugar = listaLugar;
+            }
+        }
+        public void listarBus()
+        {
+            List<SelectListItem> listaBus;
+            using (var bd = new BDPasajeEntities1())
+            {
+                listaBus = (from tipoContrato in bd.Bus
+                         where tipoContrato.BHABILITADO == 1
+                         select new SelectListItem
+                         {
+                             Text = tipoContrato.PLACA,
+                             Value = tipoContrato.IIDBUS.ToString()
+                         }).ToList();
+                listaBus.Insert(0, new SelectListItem { Text = "--Seleccione", Value = "" });
+                ViewBag.listaBus = listaBus;
+            }
+        }
+        public void ListarCombos()
+        {
+            listarBus();
+            listarLugar();
+        }
+    }   
 }

@@ -20,7 +20,7 @@ namespace Pasaje5.Controllers
                               where marca.BHABILITADO == 1
                               select new MarcaCLS
                               {
-                                    iidamarca = marca.IIDMARCA,
+                                    iidmarca = marca.IIDMARCA,
                                     nombre = marca.NOMBRE,
                                     descripcion = marca.DESCRIPCION
                               }).ToList();//tranforma la consulta en list        
@@ -37,11 +37,29 @@ namespace Pasaje5.Controllers
             using(var bd = new BDPasajeEntities1())
             {
                 Marca oMarca = bd.Marca.Where(p => p.IIDMARCA.Equals(id)).First();//First es para que devuelva un objero y no una lista
-                oMarcaCLS.iidamarca = oMarca.IIDMARCA;
+                oMarcaCLS.iidmarca = oMarca.IIDMARCA;
                 oMarcaCLS.nombre = oMarca.NOMBRE;
                 oMarcaCLS.descripcion = oMarca.DESCRIPCION;
             }
             return View(oMarcaCLS);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(MarcaCLS oMarcaCLS)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(oMarcaCLS);
+            }
+            int idMarca = oMarcaCLS.iidmarca;
+            using(var bd = new BDPasajeEntities1())
+            {
+                Marca oMarca = bd.Marca.Where(p => p.IIDMARCA.Equals(idMarca)).First();
+                oMarca.NOMBRE = oMarcaCLS.nombre;
+                oMarca.DESCRIPCION = oMarcaCLS.descripcion;
+                bd.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
         [HttpPost]
         public ActionResult Agregar(MarcaCLS oMarcaCls)//trae el model de la vista (creo)

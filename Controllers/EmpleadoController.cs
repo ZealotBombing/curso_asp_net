@@ -137,5 +137,29 @@ namespace Pasaje5.Controllers
             }
             return View(oEmpleadoCLS);
         }
+        [HttpPost]
+        public ActionResult Editar(EmpleadoCLS oEmpleadoCLS)
+        {
+            int idEmpleado = oEmpleadoCLS.iidEmpleado;
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            using (var bd = new BDPasajeEntities1())
+            {
+                Empleado oEmpleado = bd.Empleado.Where(p => p.IIDEMPLEADO.Equals(idEmpleado)).First();
+                oEmpleado.NOMBRE = oEmpleadoCLS.nombre;
+                oEmpleado.APMATERNO = oEmpleadoCLS.apMaterno;
+                oEmpleado.APPATERNO = oEmpleadoCLS.apPaterno;
+                oEmpleado.NOMBRE = oEmpleadoCLS.nombre;
+                oEmpleado.FECHACONTRATO = oEmpleadoCLS.fechaContrato;
+                oEmpleado.SUELDO = oEmpleadoCLS.sueldo;
+                oEmpleado.NOMBRE = oEmpleadoCLS.nombre;
+                oEmpleado.IIDTIPOUSUARIO = oEmpleadoCLS.iidtipoContrato;
+                oEmpleado.IIDSEXO = oEmpleadoCLS.iidSexo;
+                bd.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -32,6 +32,28 @@ namespace Pasaje5.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Agregar(SucursalCLS oSucursalCLS)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            using(var bd = new BDPasajeEntities1())
+            {
+                Sucursal oSucursal = new Sucursal();
+                oSucursal.NOMBRE = oSucursalCLS.nombre;
+                oSucursal.DIRECCION = oSucursalCLS.direccion;
+                oSucursal.TELEFONO = oSucursalCLS.telefono;
+                oSucursal.EMAIL = oSucursalCLS.email;
+                oSucursal.FECHAAPERTURA = oSucursalCLS.fechaApertura;
+                oSucursal.BHABILITADO = 1;
+                bd.Sucursal.Add(oSucursal);
+                bd.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
         public ActionResult Editar(int id)
         {
             SucursalCLS oSucursalCLS = new SucursalCLS();
@@ -45,7 +67,27 @@ namespace Pasaje5.Controllers
                 oSucursalCLS.email = oSucursal.EMAIL;
                 oSucursalCLS.fechaApertura = (DateTime)oSucursal.FECHAAPERTURA;
             }
-            return View();
+            return View(oSucursalCLS);
+        }
+        [HttpPost]
+        public ActionResult Editar(SucursalCLS oSucursalCLS)
+        {
+            int idSucursal = oSucursalCLS.iidsucursal;
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            using(var bd = new BDPasajeEntities1())
+            {
+                Sucursal oSucursal = bd.Sucursal.Where(p => p.IIDSUCURSAL.Equals(idSucursal)).First();
+                oSucursal.NOMBRE = oSucursalCLS.nombre;
+                oSucursal.DIRECCION = oSucursalCLS.direccion;
+                oSucursal.TELEFONO = oSucursalCLS.telefono;
+                oSucursal.EMAIL = oSucursalCLS.email;
+                oSucursal.FECHAAPERTURA = oSucursalCLS.fechaApertura;
+                bd.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

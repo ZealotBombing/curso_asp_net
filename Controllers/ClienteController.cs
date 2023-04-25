@@ -23,8 +23,6 @@ namespace Pasaje5.Controllers
                                   nombre = cliente.NOMBRE,
                                   appaterno = cliente.APMATERNO,
                                   apmaterno = cliente.APMATERNO,
-                                  bhabilitado = cliente.BHABILITADO
-
                               }).ToList();
             }
             return View(lstCliente);//MOdel
@@ -35,7 +33,7 @@ namespace Pasaje5.Controllers
             using(var bd = new BDPasajeEntities1())
             {
                 llenarSexo();
-                ViewBag.lista = listaSexo;
+                //ViewBag.lista = listaSexo;
 
                 Cliente oCliente = bd.Cliente.Where(p => p.IIDCLIENTE.Equals(id)).First();
                 oClienteCLS.iidcliente = oCliente.IIDCLIENTE;
@@ -50,11 +48,38 @@ namespace Pasaje5.Controllers
             }
             return View(oClienteCLS);
         }
-        List<SelectListItem> listaSexo;
+        [HttpPost]
+        public ActionResult Editar(ClienteCLS oClienteCLS)
+        {
+            int idCliente = oClienteCLS.iidcliente;
+            //if (!ModelState.IsValid)
+            //{
+            //    llenarSexo();
+            //    return View(oClienteCLS);
+            //}
+            using (var bd = new BDPasajeEntities1())
+            {
+                Cliente oCliente = bd.Cliente.Where(p => p.IIDCLIENTE.Equals(idCliente)).First();
+                oCliente.NOMBRE = oClienteCLS.nombre;
+                oCliente.APPATERNO = oClienteCLS.appaterno;
+                oCliente.APMATERNO = oClienteCLS.apmaterno;
+                oCliente.EMAIL = oClienteCLS.email;
+                oCliente.DIRECCION = oClienteCLS.direccion;
+                oCliente.IIDSEXO = oClienteCLS.iidsexo;
+                oCliente.TELEFONOFIJO = oClienteCLS.telefonoFijo;
+                oCliente.TELEFONOCELULAR = oClienteCLS.telefonoFijo;
+
+                bd.SaveChanges();
+
+            }
+            return RedirectToAction("Index");
+        }
 
         private void llenarSexo()
         {
-            using(var bd = new BDPasajeEntities1())
+            List<SelectListItem> listaSexo;
+
+            using (var bd = new BDPasajeEntities1())
             {
                 listaSexo = (from sexo in bd.Sexo
                             where sexo.BHABILITADO == 1
@@ -64,25 +89,26 @@ namespace Pasaje5.Controllers
                                 Value = sexo.IIDSEXO.ToString()
                             }).ToList();
                 listaSexo.Insert(0,new SelectListItem{ Text="--Seleccione--", Value = ""});
+                ViewBag.lista = listaSexo;
+
             }
         }
         public ActionResult Agregar()
         {
             llenarSexo();//llena el sexo en void y después lo entrega abajo, pero creo que servirpia con return
-            ViewBag.lista = listaSexo;
             return View();
         }
         [HttpPost]
         public ActionResult Agregar(ClienteCLS oClienteCLS)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    llenarSexo();//para que se vuelva a llenar el combobox
-            //    ViewBag.lista = listaSexo;
+            if (!ModelState.IsValid)
+            {
+                llenarSexo();//para que se vuelva a llenar el combobox
+                //ViewBag.lista = listaSexo;
 
-            //    return View(oClienteCLS);
-            //}  //sin esto es como funciona
-            using(var bd=new BDPasajeEntities1())
+                return View(oClienteCLS);
+            }  //sin esto es como funciona
+            using (var bd=new BDPasajeEntities1())
             {
                 Cliente oCliente = new Cliente();
                 oCliente.NOMBRE = oClienteCLS.nombre;
@@ -101,5 +127,7 @@ namespace Pasaje5.Controllers
             }
             return RedirectToAction("Index");
         }
+       
+        
     }
 }

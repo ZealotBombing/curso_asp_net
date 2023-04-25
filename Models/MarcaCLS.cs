@@ -9,7 +9,7 @@ namespace Pasaje5.Models
     public class MarcaCLS
     {
         [Display(Name = "Id Marca")]
-        public int iidamarca { get; set; }
+        public int iidmarca { get; set; }
         [Display(Name = "Nombre Marca")]
         [Required]
         [StringLength(100, ErrorMessage = "La Longitud máxima es 100")]

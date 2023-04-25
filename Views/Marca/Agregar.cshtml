@@ -7,24 +7,34 @@
 <h2>Agregar</h2>
 <div class="row">
     <div class="col-md-6">
-        @using (Html.BeginForm("Agregar", "Marca", FormMethod.Post))
-        {
+        @using (Html.BeginForm("Agregar", "Marca", FormMethod.Post, new { @id = "frm_agregar" }))
+         {
             <div>
                 @Html.LabelFor(p => p.nombre)
-                <br/>
+                <br />
                 @Html.TextBoxFor(p => p.nombre, new { @class = "from-control" })
-                @Html.ValidationMessage("nombre", new {@class ="text-danger"})
+                @Html.ValidationMessage("nombre", new { @class = "text-danger" })
             </div>
             <div>
                 @Html.LabelFor(p => p.descripcion)
-                <br/>
+                <br />
                 @Html.TextBoxFor(p => p.descripcion, new { @class = "from-control" })
                 @Html.ValidationMessage("descripcion", new { @class = "text-danger" })
             </div>
             <br />
             <div style="margin:auto">
-                <input type="submit" class="btn btn-primary" value="Guardar"/>
+                <input type="submit" class="btn btn-primary" value="Guardar" />
+                @Html.ActionLink("Regresar","Index","Marca",null,new { @class = "btn btn-danger"});
             </div>
-        }
+         }
     </div>
 </div>
+<script>
+    var frm_agregar = document.getElementById("frm_agregar");
+    frm_agregar.onsubmit = function (e) {
+        e.preventDefault();
+        if (confirm("¿Deseas guardar los cambios") == 1) {
+            frm_agregar.submit();
+        }
+    }
+</script>

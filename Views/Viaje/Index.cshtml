@@ -5,6 +5,7 @@
 }
 
 <h2>Index</h2>
+@Html.ActionLink("Agregar", "Agregar", "Viaje", null, new { @class = "btn btn-primary"})
 <table class="table table-bordered table-hover">
     <tr>
         <td>@Html.LabelFor(p => Model[0].iidViaje)</td>
@@ -19,6 +20,10 @@
             <td>@item.nombreLugarOrigen</td>
             <td>@item.nombreLugarDestino</td>
             <td>@item.nombreBus</td>
+            <td>
+                @Html.ActionLink(" ", "Editar", "Viaje", new { id = item.iidViaje }, new { @class = "glyphicon glyphicon-edit btn btn-primary" })
+                @Html.ActionLink(" ", "Eliminar", "Viaje", new { id = item.iidViaje }, new { @class = "glyphicon glyphicon-trash btn btn-danger" })
+            </td>
         </tr>
      }
 </table>

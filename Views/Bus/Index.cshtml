@@ -5,24 +5,33 @@
 }
 
 <h2>Index</h2>
-
+@Html.ActionLink("Agregar","Agregar","Bus",new { @class = "btn btn-primary"})
 <table class="table table-bordered table-hover">
-    <tr>
-        <td>@Html.LabelFor(p => Model[0].iidBus)</td>
-        <td>@Html.LabelFor(p => Model[0].placa)</td>
-        <td>@Html.LabelFor(p => Model[0].nombreModelo)</td>
-        <td>@Html.LabelFor(p => Model[0].nombreSucursal)</td>
-        <td>@Html.LabelFor(p => Model[0].nombreTipoBus)</td>
-    </tr>
-    <tr>
-        @foreach(var item in Model)
-            {
+    <thead>
+        <tr>
+            <th>@Html.LabelFor(p => Model[0].iidBus)</th>
+            <th>@Html.LabelFor(p => Model[0].placa)</th>
+            <th>@Html.LabelFor(p => Model[0].nombreModelo)</th>
+            <th>@Html.LabelFor(p => Model[0].nombreSucursal)</th>
+            <th>@Html.LabelFor(p => Model[0].nombreTipoBus)</th>
+            <th>Operaciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
                 <td>@item.iidBus</td>
                 <td>@item.placa</td>
                 <td>@item.nombreModelo</td>
                 <td>@item.nombreSucursal</td>
                 <td>@item.nombreTipoBus</td>
-            }
-    </tr>
+                <td>
+                    @Html.ActionLink(" ", "Editar", "Bus", new { id = item.iidBus }, new { @class = "glyphicon glyphicon-edit btn btn-primary" })
+                    @Html.ActionLink(" ", "Eliminar", "Bus", new { id = item.iidBus }, new { @class = "glyphicon glyphicon-trash btn btn-danger" })
+                </td>
+            </tr>
+         }
+    </tbody>
 </table>
 
